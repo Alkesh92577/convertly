@@ -53,6 +53,7 @@ function getToolDescription(tool) {
 
 // ---------- SITEMAP ----------
 
+
 app.get('/sitemap.xml', (req, res) => {
   const staticPages = [
     '/',
@@ -61,21 +62,25 @@ app.get('/sitemap.xml', (req, res) => {
     '/privacy-policy.html',
   ];
 
-  const toolPages = tools.map((tool) => `/tools/${getToolSlug(tool)}`);
+  const toolPages = tools.map(
+    (tool) => `/tools/${getToolSlug(tool)}`
+  );
 
   const urls = [...staticPages, ...toolPages];
 
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls.map((url) => `
-  <url>
-    <loc>${BASE_URL}${url}</loc>
-  </url>`).join('')}
-</urlset>`;
+  const xml = [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">',
+    ...urls.map(
+      (url) => `<url><loc>${BASE_URL}${url}</loc></url>`
+    ),
+    '</urlset>',
+  ].join('');
 
-  res.type('application/xml');
+  res.set('Content-Type', 'application/xml; charset=utf-8');
   res.send(xml);
 });
+
 
 // ---------- STATIC WEBSITE ----------
 
