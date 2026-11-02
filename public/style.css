@@ -374,3 +374,38 @@ html {
 .footer-tools-link {
   cursor: pointer;
 }
+
+
+/* SEO tool cards */
+a.card {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a.card:hover {
+  transform: translateY(-3px);
+  transition: transform 0.2s ease;
+}
+
+/* SEO landing page content */
+.seo-content {
+  max-width: 850px;
+  margin: 40px auto;
+  line-height: 1.8;
+}
+
+.seo-content h2 {
+  margin-top: 30px;
+  margin-bottom: 12px;
+}
+
+.seo-content h3 {
+  margin-top: 20px;
+  margin-bottom: 8px;
+}
+
+.seo-content li {
+  margin-bottom: 8px;
+}
