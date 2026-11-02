@@ -1,0 +1,5 @@
+
+User-agent: *
+Allow: /
+
+Sitemap: https://convertly-ochre-ten.vercel.app/sitemap.xml
