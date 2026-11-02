@@ -54,32 +54,26 @@ function getToolDescription(tool) {
 // ---------- SITEMAP ----------
 
 
+
 app.get('/sitemap.xml', (req, res) => {
-  const staticPages = [
-    '/',
-    '/about.html',
-    '/contact.html',
-    '/privacy-policy.html',
+  const urls = [
+    `${BASE_URL}/`,
+    `${BASE_URL}/about.html`,
+    `${BASE_URL}/contact.html`,
+    `${BASE_URL}/privacy-policy.html`,
+    ...tools.map((tool) => getToolUrl(tool)),
   ];
 
-  const toolPages = tools.map(
-    (tool) => `/tools/${getToolSlug(tool)}`
-  );
+  const xml =
+    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">` +
+    urls.map((url) => `<url><loc>${url}</loc></url>`).join('') +
+    `</urlset>`;
 
-  const urls = [...staticPages, ...toolPages];
-
-  const xml = [
-    '<?xml version="1.0" encoding="UTF-8"?>',
-    '<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">',
-    ...urls.map(
-      (url) => `<url><loc>${BASE_URL}${url}</loc></url>`
-    ),
-    '</urlset>',
-  ].join('');
-
-  res.set('Content-Type', 'application/xml; charset=utf-8');
+  res.status(200);
+  res.set('Content-Type', 'application/xml; charset=UTF-8');
   res.send(xml);
 });
+
 
 
 // ---------- STATIC WEBSITE ----------
